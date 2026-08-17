@@ -1,25 +1,64 @@
-from dotenv import load_dotenv
-load_dotenv()
-
 import os
+from dotenv import load_dotenv
 from google import genai
 
 from blunder_finder import blunder_finder
 
-chosen_colour = "white"
-pgn_path = "lichess_pgn_2024.08.16_winifyoucan1266_vs_jefgdbn.Bsm6WW23.pgn"
+load_dotenv()
+
+# Get settings from the user
+pgn_path = input("Enter the path to the PGN file: ")
+chosen_colour = input("Which colour do you want to analyze? (white/black): ").lower()
+
 eval_threshold = 1
 depth = 12
-print(f"Analyzing game {pgn_path} for {chosen_colour} with eval threshold {eval_threshold} and depth {depth}...")   
-blunders = blunder_finder(chosen_colour, pgn_path, eval_threshold, depth)
 
-print(f"Found {len(blunders)} blunders for {chosen_colour} in the game {pgn_path} with eval threshold {eval_threshold} and depth {depth}.")
-client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+print(
+    f"\nAnalyzing game {pgn_path} for {chosen_colour} "
+    f"with eval threshold {eval_threshold} and depth {depth}..."
+)
 
-prompt = "For each of these blunders, provide a short explaination why they are a mistake and what the better plan was"
+blunders = blunder_finder(
+    chosen_colour,
+    pgn_path,
+    eval_threshold,
+    depth
+)
+
+print(
+    f"Found {len(blunders)} blunders for {chosen_colour} "
+    f"in the game {pgn_path} with eval threshold "
+    f"{eval_threshold} and depth {depth}."
+)
+
+# Gemini
+api_key = os.getenv("GEMINI_API_KEY")
+
+if not api_key:
+    raise RuntimeError("GEMINI_API_KEY is not set.")
+
+client = genai.Client(api_key=api_key)
+
+prompt = """
+For each of these blunders, provide a short explanation of:
+- why the move was a mistake
+- what the better plan was
+
+Explain the ideas in a way that a chess player can understand.
+
+"""
+
 for blunder in blunders:
-    prompt += f"Move {blunder['move_number']}: Eval before: {blunder['eval_before']}, Eval after: {blunder['eval_after']}, Engine line after blunder: {blunder['engine_line_after_blunder']}, Best move line: {blunder['best_move_line']}, FEN: {blunder['fen']}\n"
-print(prompt)
+    prompt += (
+        f"Move {blunder['move_number']}: "
+        f"Eval before: {blunder['eval_before']}, "
+        f"Eval after: {blunder['eval_after']}, "
+        f"Engine line after blunder: {blunder['engine_line_after_blunder']}, "
+        f"Best move line: {blunder['best_move_line']}, "
+        f"FEN: {blunder['fen']}\n"
+    )
+
+print("\nGenerating explanations...\n")
 
 response = client.models.generate_content(
     model="gemini-3.6-flash",
