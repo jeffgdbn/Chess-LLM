@@ -1,0 +1,24 @@
+[Event "rated rapid game"]
+[Site "https://lichess.org/Bsm6WW23"]
+[Date "2024.08.16"]
+[Round "-"]
+[White "winifyoucan1266"]
+[Black "jefgdbn"]
+[Result "0-1"]
+[GameId "Bsm6WW23"]
+[UTCDate "2024.08.16"]
+[UTCTime "16:06:03"]
+[WhiteElo "2032"]
+[BlackElo "1886"]
+[WhiteRatingDiff "-36"]
+[BlackRatingDiff "+8"]
+[Variant "Standard"]
+[TimeControl "600+0"]
+[ECO "A00"]
+[Opening "Mieses Opening"]
+[Termination "Normal"]
+[Annotator "lichess.org"]
+
+1. d3 { [%clk 0:10:00] } { A00 Mieses Opening } 1... e6 { [%clk 0:10:00] } 2. Nc3 { [%clk 0:09:53] } 2... d5 { [%clk 0:09:57] } 3. Bg5 { [%clk 0:09:51] } 3... Be7 { [%clk 0:09:50] } 4. Nf3 { [%clk 0:09:48] } 4... Bxg5 { [%clk 0:09:49] } 5. h4 { [%clk 0:09:39] } 5... Be7 { [%clk 0:09:45] } 6. Rh3 { [%clk 0:09:36] } 6... Nf6 { [%clk 0:09:40] } 7. Qd2 { [%clk 0:09:28] } 7... e5 { [%clk 0:09:32] } 8. O-O-O { [%clk 0:08:17] } 8... Bxh3 { [%clk 0:09:08] } 9. gxh3 { [%clk 0:07:50] } 9... Nc6 { [%clk 0:08:54] } 10. Qg5 { [%clk 0:07:40] } 10... O-O { [%clk 0:08:18] } 11. h5 { [%clk 0:06:57] } 11... Ne4 { [%clk 0:08:10] } 12. dxe4 { [%clk 0:06:56] } 12... Bxg5+ { [%clk 0:08:08] } 13. Nxg5 { [%clk 0:06:53] } 13... Qxg5+ { [%clk 0:08:06] } 14. e3 { [%clk 0:06:47] } 14... d4 { [%clk 0:08:03] } 15. Bb5 { [%clk 0:06:37] } 15... dxe3 { [%clk 0:07:59] } 16. Rd7 { [%clk 0:06:27] } 16... exf2+ { [%clk 0:07:57] } 17. Kd1 { [%clk 0:06:01] } 17... f1=Q+ { [%clk 0:07:57] } 18. Bxf1 { [%clk 0:04:56] } 18... Rfd8 { [%clk 0:07:57] } 19. Ke1 { [%clk 0:04:53] } 19... Rxd7 { [%clk 0:07:52] } { White resigns. } 0-1
+
+
