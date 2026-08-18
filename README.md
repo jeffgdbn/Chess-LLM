@@ -7,13 +7,13 @@ This chess coach uses stockfish to find mistakes in a pgn file for a chess game,
 3. Flags when a mistake is made by the player we are analysing (when the evaluation swings past a threshold).
 4. LLM explains why the move was a mistake, given the position, evaluation, the top line of the engine, and the line after the blunder.
 
-## Setup
+## Setup:
 - Requires Python 3.12+, Stockfish (install separately from stockfishchess.org)
 - pip install -r requirements.txt
 - Add API key to .env (see .env.example)
 - There is an example game pgn already in the folder, but it is possible to upload a different game and use that instead.
 
-## Evaluation
+## Evaluation:
 I tested the system on lots of different types of mistakes from different games. The LLM correctly distinguished between missed opportunities and blunders, and was particularly successful in spotting tactical blunders/misses (when a short, forced sequence of moves leads to a better position). This is because these forcing lines are clearly reflected in the engine lines that we parse into the LLM. 
 
 For positional mistakes, (when there is an error in spotting the best long term plans), the LLM was  less able to describe the concept behind the mistake, partly because of the depth of the engine not being high enough (so the LLM couldn't see far enough into the future), but mainly because we only gave the LLM the top line of the engine, which doesn't show why other possibilities are inferior. For example, a positional mistake might force you to create weaknesses elsewhere to compensate for that mistake. Since in the computer line doesn't show the LLM why these other weaknesses were actually forced.
