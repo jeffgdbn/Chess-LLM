@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv
 from google import genai
-
 from blunder_finder import blunder_finder
 
 load_dotenv()
