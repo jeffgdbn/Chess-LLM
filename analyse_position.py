@@ -35,3 +35,6 @@ def analyse_position(fen, depth=15, linedepth=5, moves=None, engine_path=stockfi
         "best_move": best_move,
         "best_line": best_line,
     }
+
+    def consult_engine(fen, depth=15, moves=None, engine_path=stockfish_path):
+        return analyse_position(fen, depth=depth, linedepth=1, moves=moves, engine_path=engine_path)

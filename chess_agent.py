@@ -7,6 +7,50 @@ from analyse_position import analyse_position
 
 load_dotenv()
 
+CONSULT_ENGINE_TOOL = {
+    "function_declarations": [
+        {
+            "name": "consult_engine",
+            "description": "Get Stockfish's evaluation and predicted continuation "
+            "for a chess position. Optionally play a sequence of moves first to "
+            "explore a hypothetical line, not just the position as given. Use "
+            "this whenever you need to check how good or bad a position is, "
+            "verify whether a candidate move is actually strong, or compare "
+            "different continuations. The evaluation is always relative to "
+            "whichever side is to move in the resulting position — check whose "
+            "turn it is before interpreting a positive or negative number.",
+            "parameters": {
+                "type": "OBJECT",
+                "properties": {
+                    "fen": {
+                        "type": "STRING",
+                        "description": "The starting board position in FEN notation",
+                    },
+                    "moves": {
+                        "type": "ARRAY",
+                        "items": {"type": "STRING"},
+                        "description": "Optional. A sequence of moves in UCI notation to "
+                        "play from the starting position before analysing (e.g. "
+                        "['g1f3', 'g8f6', 'b1c3']). Omit to analyse the starting "
+                        "position as-is.",
+                    },
+                    "depth": {
+                        "type": "INTEGER",
+                        "description": "Engine search depth. Default 15.",
+                    },
+                    "linedepth": {
+                        "type": "INTEGER",
+                        "description": "How many moves of the predicted continuation to "
+                        "return. Default 5.",
+                    },
+                },
+                "required": ["fen"],
+            },
+        }
+    ]
+}
+
+
 def explain_blunder_with_gemini(
     fen,
     move,
@@ -55,9 +99,15 @@ def explain_blunder_with_gemini(
         "Keep it concise but informative, and do not mention the engine by name unless useful."
     )
 
+    config = {
+        "tools": [CONSULT_ENGINE_TOOL],
+        "automatic_function_calling": {"ignore_call_history": True},
+    }
+
     response = client.models.generate_content(
         model=model,
         contents=prompt,
+        config=config,
     )
     return response.text
 
