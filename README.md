@@ -21,7 +21,7 @@ For positional mistakes, (when there is an error in spotting the best long term 
 
 Additionally, both versions occasionally struggled in the early game, because there are theoretical moves that exist that Stockfish incorrectly thinks are mistakes on a low depth, but are actually good moves on a much higher depth. This problem could be solved by either using a higher depth, or maybe by adding an opening database to the program.
 
-Overall, this project was successful, especially in identifying tactical mistakes, but it had limited accuracy due to Stockfish's depth and using only one engine line. If multiple engine lines and a higher depth were used, as well as potentially using an opening database, it would improve the ability of the program to explain deeper positional mistakes.
+Overall, this project was successful, especially in identifying tactical mistakes, and it was very satisfying to see the improvement on positional mistakes when comparing V1 with V2.
 
 ## Potential extensions:
 - Connect to an opening database, and query the database for any opening mistakes that are flagged that might not actually be mistakes.
